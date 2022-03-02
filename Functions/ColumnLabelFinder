@@ -1,0 +1,45 @@
+# Function to compare a list with a dataframe and return the equivalent column
+# Univariate Feature Selection, output selected features using sklearn SelectKbest
+
+def cdfColumnLabelFinder(dataframe,features):
+    featDf = pd.DataFrame(features)
+    featDf
+    featDf.columns = ['a','b']#,'c','d']
+    featDf
+    labelList = []
+
+    colDict = dict()
+    cols = list(dataframe.columns)[0:-1] # list of columns in our data
+    for col in cols:
+        #colDict[col]= dataframe[col].values.tolist()
+        columnData = dataframe[col]
+        #Convert column data to a list
+        columnData = columnData.values.tolist()
+        # add the column name, col and the content, columnData to the dictionary
+        colDict[col]=columnData
+
+    colLen = len(featDf.columns.tolist())
+    counter = 0
+    while counter <colLen:
+        colLabel = ''
+        if counter == 0:
+            colLabel = 'a'
+        elif counter == 1:
+            colLabel ='b'
+        elif counter == 2:
+            colLabel = 'c'
+        elif counter == 3:
+            colLabel='d' 
+
+        else:
+            pass        
+        colData = featDf.loc[:,colLabel]
+        colDataVals = list(colData.values)
+        #print(colDataVals)    
+        for item in colDict.items():
+            if colDataVals == item[1]:
+                print('label is :' , item[0])
+                labelList.append(item[0])
+        counter+=1
+        
+        return labelList
